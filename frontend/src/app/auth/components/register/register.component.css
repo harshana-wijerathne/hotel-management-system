@@ -1,0 +1,7 @@
+.form-outline i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+
+}

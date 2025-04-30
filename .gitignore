@@ -1,0 +1,41 @@
+# === Global ===
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+.env
+
+# === Backend (Spring Boot) ===
+/backend/target/
+/backend/.classpath
+/backend/.project
+/backend/.settings/
+/backend/.mvn/
+/backend/mvnw
+/backend/mvnw.cmd
+/backend/*.iml
+
+# IntelliJ / Eclipse / VSCode config (common Java IDEs)
+.backend/.idea/
+.backend/.vscode/
+.backend/.factorypath
+
+# === Frontend (Angular) ===
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.angular/
+/frontend/.env
+/frontend/*.log
+/frontend/.vscode/
+/frontend/.idea/
+/frontend/*.iml
+
+# Angular cache
+/frontend/.angular/cache/
+
+# === OS Generated Files ===
+*.swp
+*.swo
+
+**/.vscode/
+**/.idea/

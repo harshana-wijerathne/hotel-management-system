@@ -11,6 +11,7 @@ import { Toast } from 'bootstrap';
 import { ToastService } from '../services/toast/toast.service';
 import { Router } from '@angular/router';
 import { UserStorageService } from '../services/storage/user-storage.service';
+import { NonNullAssert } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -40,6 +41,7 @@ import { UserStorageService } from '../services/storage/user-storage.service';
               placeholder="Enter email"
               formControlName="email"
               [class.is-invalid]="isInvalid('email')"
+              value="{{un}}"
             />
           </div>
           <div class="mb-3 position-relative">
@@ -50,6 +52,7 @@ import { UserStorageService } from '../services/storage/user-storage.service';
               placeholder="Enter password"
               formControlName="password"
               [class.is-invalid]="isInvalid('password')"
+              value="{{pw}}"
             />
           </div>
           <button
@@ -60,6 +63,7 @@ import { UserStorageService } from '../services/storage/user-storage.service';
             Login
           </button>
         </form>
+        
         <div class="pt-2">
           Don't have an account?
           <a
@@ -69,6 +73,9 @@ import { UserStorageService } from '../services/storage/user-storage.service';
             >Sign up</a
           >
         </div>
+        <button type="button" class="btn btn-primary " (click)="setAdmin()">SetAdmin</button>
+        <button type="button" class="btn btn-primary " (click)="setCustomer()">SetCustomer</button>
+        
       </div>
     </div>
   `,
@@ -110,6 +117,15 @@ export class LoginComponent {
 
           UserStorageService.saveUser(user);
           UserStorageService.saveToken(res.jwt);
+
+          if(UserStorageService.isAdminLoggedIn()){                     
+            this.router.navigateByUrl('/admin/dashboard');
+          }else if(UserStorageService.isCustomerLoggedIn()){          
+            this.router.navigateByUrl('/customer/rooms');
+          }else{
+            console.log("something went wrong");
+            
+          }
         }
       },
       (error) => this.toastService.show('Bad Credentials', 'error', 2000)
@@ -118,5 +134,20 @@ export class LoginComponent {
 
   navigateToRegister(): void {
     this.router.navigateByUrl('/register');
+  };
+
+  un: string = "";
+  pw: string = "";
+
+  setAdmin(){
+    this.un = "admin@gmail.com",
+    this.pw = "admin";
   }
+
+  setCustomer(){
+    this.un = "root@gmail.com",
+    this.pw = "root";
+  }
+
+
 }

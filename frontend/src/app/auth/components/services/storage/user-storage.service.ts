@@ -45,7 +45,7 @@ export class UserStorageService {
       return false;
      }
      const role:string = this.getUserRole();
-     return role === "ADMIN";
+     return role === 'ADMIN';
   }
 
   static isCustomerLoggedIn():boolean{
@@ -53,7 +53,7 @@ export class UserStorageService {
       return false;
      }
      const role:string = this.getUserRole();
-     return role === "CUSTOMER";
+     return role === 'CUSTOMER';
   }
 
   static signOut():void{

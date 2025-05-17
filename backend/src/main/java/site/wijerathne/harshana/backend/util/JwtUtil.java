@@ -21,7 +21,7 @@ public class JwtUtil {
         return Jwts.builder().setClaims(extraClaims).setSubject(details.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000*60*60*24))
-                .signWith(SignatureAlgorithm.HS256, getSigningKey()).compact();
+                .signWith(SignatureAlgorithm.HS256,getSigningKey()).compact();
     }
 
     public String generateToken(UserDetails userDetails) {
@@ -36,7 +36,7 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
     }
 
     public String extractUserName(String token) {

@@ -12,7 +12,7 @@ export class ToastService {
   ) {
     const toastContainer = document.getElementById('toast-container');
     const toastElement = document.createElement('div');
-    toastElement.className = `toast align-items-center text-white bg-${type} border-0`;
+    toastElement.className = `toast align-items-center text-white bg-${type==="error"?"danger":""} border-0`;
     toastElement.setAttribute('role', 'alert');
     toastElement.setAttribute('aria-live', 'assertive');
     toastElement.setAttribute('aria-atomic', 'true');

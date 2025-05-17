@@ -10,10 +10,9 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 import { ToastService } from '../services/toast/toast.service';
 
-
 @Component({
   selector: 'app-register',
-  standalone:true,
+  standalone: true,
   imports: [NgOptimizedImage, ReactiveFormsModule],
   template: `
     <div
@@ -29,9 +28,12 @@ import { ToastService } from '../services/toast/toast.service';
           priority
         />
 
-        <h4 class="mb-4">Enter Details to Register</h4>
+        <h4 class="mb-4 ">Enter Details to Register</h4>
       </div>
-      <div class="card p-4" style="width: 100%; max-width: 600px;">
+      <div
+        class="card p-4"
+        style="width: 100%; max-width: 600px; box-shadow: 8px 8px 8px 2px"
+      >
         <form #frm [formGroup]="registerForm" (ngSubmit)="submitForm()">
           <div class="mb-3 position-relative">
             <i class="bi bi-person form-icon"> Name:</i>
@@ -65,6 +67,15 @@ import { ToastService } from '../services/toast/toast.service';
           </div>
           <button type="submit" class="btn btn-dark w-100">Register</button>
         </form>
+        <div class="pt-2">
+          Already have an account?
+          <a
+            class="text-primary "
+            style="cursor: pointer;"
+            (click)="navigateToLogin()"
+            >Log In</a
+          >
+        </div>
       </div>
     </div>
   `,
@@ -96,14 +107,17 @@ export class RegisterComponent {
   }
 
   submitForm() {
-    // this.authService.register(this.registerForm.value).subscribe(res=>{
-    //   if(res.id !=null){
-    //     this.toastService.show("Signup successfull","success")
-    //     this.router.navigateByUrl("/")
-    //   }else{
-    //     this.toastService.show("Something went wrong","error")
-    //   }
-    // })
-    this.toastService.show('Signup successfull', 'success');
+    this.authService.register(this.registerForm.value).subscribe((res) => {
+      if (res.id != null) {
+        this.toastService.show('Signup successfull', 'success');
+        this.router.navigateByUrl('/');
+      } else {
+        this.toastService.show('Something went wrong', 'error');
+      }
+    });
+  }
+
+  navigateToLogin(): void {
+    this.router.navigateByUrl('/login');
   }
 }

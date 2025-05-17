@@ -3,5 +3,17 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
+}
 
+.card {
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+img {
+  border-radius: 50%;
+  &:hover {
+    transform: scale(1.05);
+  }
 }

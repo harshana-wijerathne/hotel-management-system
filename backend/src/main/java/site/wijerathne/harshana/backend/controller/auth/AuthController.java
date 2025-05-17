@@ -20,6 +20,7 @@ import site.wijerathne.harshana.backend.dto.UserDto;
 import site.wijerathne.harshana.backend.entity.User;
 import site.wijerathne.harshana.backend.repository.UserRepository;
 import site.wijerathne.harshana.backend.service.auth.AuthService;
+import site.wijerathne.harshana.backend.service.jwt.UserService;
 import site.wijerathne.harshana.backend.util.JwtUtil;
 
 import java.util.Optional;
@@ -36,6 +37,8 @@ public class AuthController {
     private final UserRepository userRepository;
 
     private final JwtUtil jwtUtil;
+
+    private final UserService userService;
 
 
     @PostMapping("/signup")
@@ -60,8 +63,9 @@ public class AuthController {
             throw new BadCredentialsException("Invalid email or password");
         }
 
-        final UserDetails userDetails = null;
+        final UserDetails userDetails = userService.getUserDetailsService().loadUserByUsername(authenticationRequest.getEmail());
         Optional<User> optionalUser = userRepository.findFirstByEmail(userDetails.getUsername());
+        System.out.println(userDetails);
         final String jwt = jwtUtil.generateToken(userDetails);
 
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();

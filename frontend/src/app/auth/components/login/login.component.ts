@@ -18,7 +18,7 @@ import { NonNullAssert } from '@angular/compiler';
   imports: [NgOptimizedImage, ReactiveFormsModule],
   template: `
     <div
-      class="container d-flex flex-column justify-content-center align-items-center vh-100"
+      class="container d-flex flex-column justify-content-center align-items-center bg-white py-4 rounded-4 shadow-sm"
     >
       <div class="text-center">
         <img
@@ -27,32 +27,35 @@ import { NonNullAssert } from '@angular/compiler';
           height="100"
           alt="logo"
           priority
+          class="rounded-circle mb-4"
         />
 
-        <h4 class="mb-4">Enter Details to login</h4>
+        <h4 class="mb-4 text-dark">Enter Details to Login</h4>
       </div>
       <div class="card p-4" style="width: 100%; max-width: 600px;">
         <form #frm [formGroup]="loginForm" (ngSubmit)="submitForm()">
-          <div class="mb-3 position-relative">
-            <i class="bi bi-envelope-at-fill form-icon"> Email:</i>
+          <div class="mb-3 position-relative text-field">
+            <i class="bi bi-envelope-at-fill form-icon ">  </i>
+            <a>EMAIL: </a>
             <input
               type="email"
-              class="form-control"
-              placeholder="Enter email"
+              class="form-control outline-hidden "
+              placeholder="abc@gmail.com"
               formControlName="email"
               [class.is-invalid]="isInvalid('email')"
-              value="{{un}}"
+              value="{{ un }}"
             />
           </div>
-          <div class="mb-3 position-relative">
-            <i class="bi bi-lock-fill form-icon"> Password:</i>
+          <div class="mb-3 position-relative text-field">
+            <i class="bi bi-lock-fill form-icon"> </i>
+            <a> PASSWORD:</a>
             <input
               type="password"
               class="form-control"
-              placeholder="Enter password"
+              placeholder="******"
               formControlName="password"
               [class.is-invalid]="isInvalid('password')"
-              value="{{pw}}"
+              value="{{ pw }}"
             />
           </div>
           <button
@@ -63,7 +66,7 @@ import { NonNullAssert } from '@angular/compiler';
             Login
           </button>
         </form>
-        
+
         <div class="pt-2">
           Don't have an account?
           <a
@@ -73,9 +76,22 @@ import { NonNullAssert } from '@angular/compiler';
             >Sign up</a
           >
         </div>
-        <button type="button" class="btn btn-primary " (click)="setAdmin()">SetAdmin</button>
-        <button type="button" class="btn btn-primary " (click)="setCustomer()">SetCustomer</button>
-        
+        <button
+          type="button"
+          class="btn btn-primary my-2"
+          hidden
+          (click)="setAdmin()"
+        >
+          Guest Admin
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          hidden
+          (click)="setCustomer()"
+        >
+          Guest Customer
+        </button>
       </div>
     </div>
   `,
@@ -118,13 +134,12 @@ export class LoginComponent {
           UserStorageService.saveUser(user);
           UserStorageService.saveToken(res.jwt);
 
-          if(UserStorageService.isAdminLoggedIn()){                     
+          if (UserStorageService.isAdminLoggedIn()) {
             this.router.navigateByUrl('/admin/dashboard');
-          }else if(UserStorageService.isCustomerLoggedIn()){          
+          } else if (UserStorageService.isCustomerLoggedIn()) {
             this.router.navigateByUrl('/customer/rooms');
-          }else{
-            console.log("something went wrong");
-            
+          } else {
+            console.log('something went wrong');
           }
         }
       },
@@ -134,20 +149,16 @@ export class LoginComponent {
 
   navigateToRegister(): void {
     this.router.navigateByUrl('/register');
-  };
-
-  un: string = "";
-  pw: string = "";
-
-  setAdmin(){
-    this.un = "admin@gmail.com",
-    this.pw = "admin";
   }
 
-  setCustomer(){
-    this.un = "root@gmail.com",
-    this.pw = "root";
+  un: string = '';
+  pw: string = '';
+
+  setAdmin() {
+    (this.un = 'admin@gmail.comm '), (this.pw = 'adminn');
   }
 
-
+  setCustomer() {
+    (this.un = 'root@gmail.comm '), (this.pw = 'roott');
+  }
 }

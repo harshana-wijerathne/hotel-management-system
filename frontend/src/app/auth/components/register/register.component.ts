@@ -16,7 +16,7 @@ import { ToastService } from '../services/toast/toast.service';
   imports: [NgOptimizedImage, ReactiveFormsModule],
   template: `
     <div
-      class="container d-flex flex-column justify-content-center align-items-center vh-100"
+      class="container d-flex flex-column justify-content-center align-items-center bg-white py-4 rounded-4"
     >
       <div class="text-center">
         <img
@@ -28,15 +28,16 @@ import { ToastService } from '../services/toast/toast.service';
           priority
         />
 
-        <h4 class="mb-4 ">Enter Details to Register</h4>
+        <h4 class="mb-4 text-dark">Enter Details to Register</h4>
       </div>
       <div
         class="card p-4"
-        style="width: 100%; max-width: 600px; box-shadow: 8px 8px 8px 2px"
+        style="width: 100%; max-width: 600px; box-shadow: 1px 1px 4px 1px"
       >
         <form #frm [formGroup]="registerForm" (ngSubmit)="submitForm()">
-          <div class="mb-3 position-relative">
-            <i class="bi bi-person form-icon"> Name:</i>
+          <div class="mb-3 position-relative text-field">
+            <i class="bi bi-person-fill form-icon"> </i>
+            <a>NAME:</a>
             <input
               type="text"
               class="form-control"
@@ -45,8 +46,9 @@ import { ToastService } from '../services/toast/toast.service';
               [class.is-invalid]="isInvalid('name')"
             />
           </div>
-          <div class="mb-3 position-relative">
-            <i class="bi bi-envelope form-icon"> Email:</i>
+          <div class="mb-3 position-relative text-field">
+            <i class="bi bi-envelope-fill form-icon"> </i>
+            <a>EMAIL:</a>
             <input
               type="email"
               class="form-control"
@@ -55,8 +57,9 @@ import { ToastService } from '../services/toast/toast.service';
               [class.is-invalid]="isInvalid('email')"
             />
           </div>
-          <div class="mb-3 position-relative">
-            <i class="bi bi-lock form-icon"> Password:</i>
+          <div class="mb-3 position-relative text-field">
+            <i class="bi bi-lock-fill form-icon"></i>
+            <a>PASSWORD:</a>
             <input
               type="password"
               class="form-control"

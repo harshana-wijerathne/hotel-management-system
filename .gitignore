@@ -20,18 +20,18 @@ Thumbs.db
 .backend/.vscode/
 .backend/.factorypath
 
-# === Frontend (Angular) ===
-/frontend/node_modules/
-/frontend/dist/
-/frontend/.angular/
-/frontend/.env
-/frontend/*.log
-/frontend/.vscode/
-/frontend/.idea/
-/frontend/*.iml
+# === client (Angular) ===
+/client/node_modules/
+/client/dist/
+/client/.angular/
+/client/.env
+/client/*.log
+/client/.vscode/
+/client/.idea/
+/client/*.iml
 
 # Angular cache
-/frontend/.angular/cache/
+/client/.angular/cache/
 
 # === OS Generated Files ===
 *.swp
